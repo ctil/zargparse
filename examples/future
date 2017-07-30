@@ -1,0 +1,40 @@
+#!/usr/bin/env python
+"""Example command line program for testing zargparse."""
+
+import argparse
+
+
+def travel(args):
+    print('Traveling to the year {} at {} MPH!'.format(args.year, args.speed))
+    if args.no_roads:
+        print("We don't need roads.")
+
+
+def fly(args):
+    print('Flying at {} feet at {} MPH!'.format(args.height, args.speed))
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='A time traveling program')
+
+    # Global flags
+    parser.add_argument('--speed', '-s', type=int, default=88,
+                        help='Speed in MPH')
+    subparsers = parser.add_subparsers(title='subcommands', dest='command')
+    subparsers.required = True
+
+    # Travel subcommand
+    parser_travel = subparsers.add_parser('travel', help='Travel in time')
+    parser_travel.add_argument('--year', '-y', type=int, default=1955,
+                               help='Year to travel to.')
+    parser_travel.add_argument('--no-roads', action='store_true', default=None,
+                               help='Enable road-free operation.')
+    parser_travel.set_defaults(func=travel)
+
+    # Fly subcommand
+    parser_fly = subparsers.add_parser('fly', help='Fly in the air')
+    parser_fly.add_argument('height', type=int, help='Height to fly, in feet')
+    parser_fly.set_defaults(func=fly)
+
+    arguments = parser.parse_args()
+    arguments.func(arguments)

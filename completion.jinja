@@ -1,0 +1,51 @@
+#compdef {{ tool.name }}
+# ----------------------------------------------------------------------------------------
+# Zsh completion file for {{ tool.name }}
+#
+# {{ tool.description }}
+#
+# This file was generated with help from Zargparse (https://github.com/ctil/zargparse)
+# ----------------------------------------------------------------------------------------
+
+typeset -A opt_args
+
+_{{ tool.name }}() {
+{% if tool.subcommands %}
+  # Define the subcommands
+  local -a commands
+  commands=(
+{% for cmd in tool.subcommands %}
+    '{{ cmd.name }}:{{ cmd.help_text }}'
+{% endfor %}
+  )
+{% endif %}
+
+  # Global flags (i.e. ones not associated with a subcommand)
+  _arguments \
+{% if tool.subcommands %}
+    "1: :{_describe 'command' commands}" \
+{% endif %}
+{% for flag in tool.flags %}
+    {{ flag.arg_string }} \
+{% endfor %}
+    '*:: :->args'
+
+{% if tool.subcommands %}
+  # Flags for each subcommand
+  case $state in
+    args)
+      case $words[1] in
+{% for cmd in tool.subcommands %}
+        {{ cmd.name }})
+          _arguments \
+{% for flag in cmd.flags %}
+            {{ flag.arg_string }} \
+{% endfor %}
+            ;;
+{% endfor %}
+      esac
+      ;;
+  esac
+{% endif %}
+}
+_{{ tool.name }}
