@@ -21,10 +21,11 @@ class Argument:
 
 class Flag:
     """A command line flag."""
-    def __init__(self, options, help_text: str, has_argument: bool) -> None:
+    def __init__(self, options, help_text: str, has_argument: bool, choices:list ) -> None:
         self.options = options
-        self.help_text = help_text
+        self.help_text = help_text.replace("'","\"").replace("[","\[").replace("]","\]")
         self.has_argument = has_argument
+        self.choices = choices
 
     @property
     def arg_string(self) -> str:
@@ -52,6 +53,8 @@ class Flag:
             # This is needed so that completion works for subcommands when a
             # global flag is used.
             result += ':'
+        if self.choices:
+            result += self.options[0]+":("+' '.join(self.choices)+")"
         result += "'"
         return result
 
@@ -144,9 +147,11 @@ class ParserAnalyzer:
                                argparse._VersionAction,
                                argparse._StoreConstAction)):
             has_argument = False
+            choices = []
         else:
             has_argument = True
-        return Flag(options, help_text, has_argument)
+            choices = action.choices
+        return Flag(options, help_text, has_argument, choices)
 
     def _analyze_subparsers(self, action: argparse._SubParsersAction) -> None:
         for index, name in enumerate(action.choices.keys()):
