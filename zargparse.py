@@ -23,7 +23,9 @@ class Flag:
     """A command line flag."""
     def __init__(self, options, help_text: str, has_argument: bool, choices:list ) -> None:
         self.options = options
-        self.help_text = help_text.replace("'","\"").replace("[","\[").replace("]","\]")
+        self.help_text = help_text
+        if help_text is not None:
+            self.help_text = help_text.replace("'","\"").replace("[","\[").replace("]","\]")
         self.has_argument = has_argument
         self.choices = choices
 
