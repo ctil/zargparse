@@ -26,7 +26,7 @@ if __name__ == '__main__':
     # Travel subcommand
     parser_travel = subparsers.add_parser('travel', help='Travel in time')
     parser_travel.add_argument('--year', '-y', type=int, default=1955,
-                               help='Year to travel to.')
+                               help='Year to travel to.', choices=(1955, 2015, 1885))
     parser_travel.add_argument('--no-roads', action='store_true', default=None,
                                help='Enable road-free operation.')
     parser_travel.set_defaults(func=travel)
