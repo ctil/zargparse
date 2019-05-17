@@ -54,7 +54,7 @@ class Flag:
             # global flag is used.
             result += ':'
         if self.choices:
-            result += self.options[0]+":("+' '.join(self.choices)+")"
+            result += "{} :({})".format(self.options[0], ' '.join([str(c) for c in self.choices]))
         result += "'"
         return result
 
