@@ -11,7 +11,7 @@ script.
 ./zargparse.py examples/future
 ```
 
-It is recommended to use [Pipenv](docs.pipenv.org) to build a virtual environment.
+It is recommended to use [Pipenv](https://docs.pipenv.org) to build a virtual environment.
 
 ```commandline
 pipenv install
