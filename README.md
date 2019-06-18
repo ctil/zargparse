@@ -1,7 +1,7 @@
 # Zargparse
 
-Usage
-------
+## Usage
+
 Pass a python script to zargparse.py and it will write out a Zsh completion
 file to the current working directory. Make sure the script is executable
 under the current environment with Python 3 since zargparse needs to run the
@@ -18,13 +18,13 @@ pipenv install
 pipenv run ./zargparse.py examples/future
 ```
 
-Dependencies
-------------
+## Dependencies
+
 Zargparse requires Python 3 and the Jinja2 library. It has been tested with
 Python 3.6.
 
-Limitations
------------
+## Limitations
+
 The tool does not support complex completions of arguments as described
 [here](https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org#main-utility-functions-for-overall-completion).
 The completion file may need to be modified by hand after generation in order
