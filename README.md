@@ -25,7 +25,7 @@ Python 3.6.
 
 Limitations
 -----------
-The tool does support complex completions of arguments as described
+The tool does not support complex completions of arguments as described
 [here](https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org#main-utility-functions-for-overall-completion).
 The completion file may need to be modified by hand after generation in order
 to fine tune the completions.
