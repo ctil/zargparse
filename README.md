@@ -8,8 +8,14 @@ under the current environment with Python 3 since zargparse needs to run the
 script.
 
 ```commandline
-pip3 install -r requirements.txt
 ./zargparse.py examples/future
+```
+
+It is recommended to use [Pipenv](docs.pipenv.org) to build a virtual environment.
+
+```commandline
+pipenv install
+pipenv run ./zargparse.py examples/future
 ```
 
 Dependencies
