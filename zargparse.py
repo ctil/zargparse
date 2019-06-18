@@ -25,7 +25,7 @@ class Flag:
         self.options = options
         self.help_text = help_text
         if help_text is not None:
-            self.help_text = help_text.replace("'","\"").replace("[","\[").replace("]","\]")
+            self.help_text = help_text.replace("'",'"').replace("[",r"\[").replace("]",r"\]")
         self.has_argument = has_argument
         self.choices = choices
 
