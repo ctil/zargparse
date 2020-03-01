@@ -5,6 +5,7 @@ import argparse
 import os
 import runpy
 import sys
+from typing import Optional
 
 import jinja2
 
@@ -16,16 +17,21 @@ class Argument:
     """A positional argument."""
     def __init__(self, name: str, help_text: str) -> None:
         self.name = name
-        self.help_text = help_text
+        self.help_text = format_help_text(help_text)
+
+
+def format_help_text(help_text: Optional[str]) -> Optional[str]:
+    """Strip leading/trailing whitespace and replace single with double quotes."""
+    if help_text is not None:
+        help_text = help_text.strip().replace("'",'"').replace("[",r"\[").replace("]",r"\]")
+    return help_text
 
 
 class Flag:
     """A command line flag."""
     def __init__(self, options, help_text: str, has_argument: bool, choices:list ) -> None:
         self.options = options
-        self.help_text = help_text
-        if help_text is not None:
-            self.help_text = help_text.replace("'",'"').replace("[",r"\[").replace("]",r"\]")
+        self.help_text = format_help_text(help_text)
         self.has_argument = has_argument
         self.choices = choices
 
@@ -65,7 +71,7 @@ class Subcommand:
     """A subcommand of a command line tool."""
     def __init__(self, name: str, help_text: str) -> None:
         self.name = name
-        self.help_text = help_text
+        self.help_text = format_help_text(help_text)
         self.flags = []
         self.arguments = []
 
