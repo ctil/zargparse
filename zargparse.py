@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """Zargparse - a tool for generating Zsh completion files."""
 
 import argparse
