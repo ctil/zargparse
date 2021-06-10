@@ -2,9 +2,11 @@
 # ----------------------------------------------------------------------------------------
 # Zsh completion file for {{ tool.name }}
 #
+{% if tool.description %}
 {% for line in tool.description.splitlines() %}
 # {{ line }}
 {% endfor %}
+{% endif %}
 #
 # This file was generated with help from Zargparse (https://github.com/ctil/zargparse)
 # ----------------------------------------------------------------------------------------
